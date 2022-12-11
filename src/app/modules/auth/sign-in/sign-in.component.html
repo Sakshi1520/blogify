@@ -1,0 +1,45 @@
+<form class="form" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+    <h2 class="form__heading">Sign In to your Account</h2>
+
+    <mat-form-field class="form-control form__element">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email">
+        <mat-error>
+            <ng-container
+                *ngTemplateOutlet="errorTemplate; context: {$implicit: signInForm.get('email'), controlName: 'Email'}">
+            </ng-container>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-control form__element">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password">
+        <mat-error>
+            <ng-container
+                *ngTemplateOutlet="errorTemplate ; context: {$implicit: signInForm.get('password'), controlName: 'Password'}">
+            </ng-container>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-error *ngIf="message" class="form__error-msg">{{message}}</mat-error>
+
+    <button mat-raised-button color="primary" type="submit" class="form__button" [disabled]="loading">
+        <span [ngClass]="{'form__submit': loading}">Submit</span>
+        <mat-spinner *ngIf="loading" color="accent" diameter="25" class="loader"></mat-spinner>
+    </button>
+
+    <div class="form__redirect">
+        <p>New to our App?</p>
+        <a [routerLink]="'/'+PATH.SIGNUP">Register Here</a>
+    </div>
+</form>
+
+<!-- Template to show Form Errors -->
+<ng-template let-control let-controlName="controlName" #errorTemplate>
+    <ng-container *ngIf="control?.hasError('required')" class="errorMsg">
+        {{controlName}} is required!
+    </ng-container>
+    <ng-container *ngIf="control?.hasError('email')">
+        Invalid {{controlName}}. please enter a valid {{controlName}}.
+    </ng-container>
+</ng-template>

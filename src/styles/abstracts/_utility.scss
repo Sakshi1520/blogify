@@ -1,0 +1,57 @@
+// Add space before element
+.space-before {
+    &::before {
+        content: ' ';
+        white-space: pre;
+    }
+}
+
+//  Loader for Submit Button
+.loader {
+    margin: 1rem auto;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.link-active {
+    text-decoration: underline;
+    outline: none;
+}
+
+//  Before data loads fir entire page
+.loading {
+    @include flex(column, center, center);
+    margin: auto;
+    height: 70vh;
+
+    &__text {
+        margin-bottom: 3rem;
+    }
+}
+
+// QUILL editor font size
+.ql-editor {
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+}
+
+.page-loading {
+    @include flex(column, middle, center);
+    margin: 5rem auto;
+}
+
+.delete-dialog {
+    margin: 1rem;
+    text-align: left;
+
+    &__warning {
+        text-align: left !important;
+        padding: 0;
+    }
+}
+
+.display-none {
+    display: none;
+}

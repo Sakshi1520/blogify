@@ -1,0 +1,63 @@
+<ng-container *ngIf="loadedFormData; else loadingData">
+<form class="article-form" [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+    <h2 class="article-form__title">Blog Details</h2>
+        <mat-form-field class="article-form__element">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="title" type="text" />
+            <mat-error>
+                <ng-container *ngTemplateOutlet="errorTemplate; context: {$implicit: articleForm.get('title'), controlName: 'Blog Title'}"></ng-container>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="article-form__element">
+            <mat-label>Tags</mat-label>
+            <mat-chip-list formControlName="tags" #chipList>
+                <mat-chip *ngFor="let tag of articleForm.get('tags')?.value" (removed)="remove(tag)">
+                  {{tag}}
+                  <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                  </button>
+                </mat-chip>
+                <input placeholder="New Tag..."
+                       [matChipInputFor]="chipList"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="addOnBlur"
+                       (matChipInputTokenEnd)="add($event)">
+              </mat-chip-list>
+            <mat-error>
+                <ng-container *ngTemplateOutlet="errorTemplate; context: {$implicit: articleForm.get('tags'), controlName: 'Tag'}"></ng-container>
+            </mat-error>
+        </mat-form-field>
+        <p>Add a tag and Press Enter Key</p>
+
+        <div class="article-form__textarea">
+            <quill-editor [styles]="EDITORSTYLE" [modules]="MODULES" formControlName="description"></quill-editor>
+            <mat-error *ngIf="descriptionEmpty" class="description-error">
+                <ng-container *ngTemplateOutlet="errorTemplate; context: {$implicit: articleForm.get('description'), controlName: 'Blog Description'}"></ng-container>
+            </mat-error>
+        </div>
+
+        <button type="button" mat-raised-button color="primary" [routerLink]="'/'+PATH.DASHBOARD">Back</button>
+        <button mat-raised-button type="submit" class="article-form__btn" color="primary" [disabled]="loading">
+            <span [ngClass]="{'form__submit': loading}">Submit</span>
+            <mat-spinner *ngIf="loading" class="loader" color="accent" diameter="25"></mat-spinner>
+        </button>
+    </form>
+</ng-container>
+
+<!-- Template to show Form Errors -->
+<ng-template #errorTemplate let-control let-controlName = "controlName">
+    <ng-container *ngIf="control?.hasError('required')" class="errorMsg">
+            {{controlName}} is required!
+    </ng-container>
+    <ng-container *ngIf="control?.hasError('minlength')">
+        {{controlName}} should contain at least {{VALIDATORS.MIN_LENGTH}} characters
+    </ng-container>
+</ng-template>
+
+<ng-template #loadingData>
+    <div class="loading">
+        <h2 class="loading__text">Loading...</h2>
+        <mat-spinner diameter="50"></mat-spinner>
+    </div>
+</ng-template>

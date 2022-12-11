@@ -1,0 +1,74 @@
+@import 'src/styles/global-styles';
+
+.article {
+    &__author {
+        @include flex(row, left, center);
+        margin-bottom: 1.5rem;
+        width: 15rem;
+        color: $gray-color;
+    }
+
+    &__author-icon {
+        background-color: $indigo-color;
+        color: $white-color;
+        border-radius: 50%;
+        margin-right: 0.5rem;
+    }
+
+    &__metadata {
+        @include flex(column, flex-start);
+
+        @include media(tablet) {
+            @include flex(row, space-between);
+        }
+    }
+
+    &__title {
+        @include ellipsis(1);
+        font-size: 2rem;
+        line-height: 2.5rem;
+        text-transform: uppercase;
+        font-weight: $medium-weight;
+        margin-bottom: 1rem;
+    }
+
+    &__tags {
+        margin: 1rem 0;
+
+        @include media(tablet) {
+            margin: 0;
+        }
+    }
+
+    &__tag {
+        word-wrap: break-word;
+        max-width: 100%;
+        cursor: pointer;
+    }
+
+    &__description {
+        @include ellipsis(1);
+        max-width: 60vw;
+    }
+
+    &__cta{
+        padding: 0;
+        margin: 0rem;
+    }
+
+    &__details {
+        @include flex(column);
+
+        @include media(tablet) {
+            @include flex(row, space-between);
+        }
+    }
+
+    &__button{
+        margin: 0 0.5rem 1rem !important;
+
+        @include media(tablet) {
+            margin: 0 0.5rem !important;
+        }
+    }
+}

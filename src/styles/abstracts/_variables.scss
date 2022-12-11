@@ -1,0 +1,24 @@
+// Screen width breakpoints for media query
+$breakpoints: (
+    tablet: 768px,
+    desktop-sm: 1025px,
+    desktop-md: 1440px,
+    desktop-lg: 1800px,
+    desktop-xl: 2500px
+);
+
+$white-color: #fff;
+$gray-color: #808080;
+$pink-color: #E54D7E;
+$indigo-color: #3f51b5;
+$form-bg-color: #fff3f4;
+$header-btn-color: $white-color;
+
+// Font weight variables
+$normal-weight: 400;
+$medium-weight: 500;
+$bold-weight: 700;
+
+$primary-font: "Roboto", "Helvetica Neue", sans-serif;
+
+$base-font-path: '../../assets/fonts'

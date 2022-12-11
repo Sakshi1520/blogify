@@ -1,0 +1,54 @@
+@import 'src/styles/global-styles';
+
+.header {
+    @include flex(row, space-between, center);
+    position: fixed;
+    z-index: 5;
+    top: 0;
+
+    &__nav {
+        @include flex(row, space-between, center);
+    }
+
+    &__link {
+        display: none;
+        @include media(tablet) {
+            display: block;
+            font-size: 1.6rem;
+            line-height: 2rem;
+            margin-right: 2rem;
+            color: white;
+        }
+    }
+
+    &__welcome {
+        @include ellipsis(1);
+    }
+
+    &__btn {
+        @include flex();
+        background: none;
+        border: none;
+        color: $header-btn-color;
+    }
+
+    &__btn-title {
+        display: none;
+
+        @include media(tablet) {
+            display: inline-block;
+        }
+    }
+
+    &__mobile-menu {
+        @include media(tablet) {
+            display: none;
+        }
+    }
+}
+
+.mobile-menu {
+    @include media(tablet) {
+        display: none;
+    }
+}

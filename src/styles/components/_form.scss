@@ -1,0 +1,72 @@
+.form {
+    @include flex(column, flex-start, center);
+    text-align: center;
+    width: 85%;
+    margin: 10rem auto 0;
+    padding: 4rem 2rem 8rem;
+    border-radius: 1rem;
+    font-size: 1.75rem;
+    line-height: 2rem;
+    background-color: $form-bg-color;
+    position: relative;
+
+    @include media(tablet) {
+        padding: 4rem 2rem 8rem;
+        width: 50%;
+    }
+
+    @include media(desktop-sm) {
+        width: 30%;
+    }
+
+    @include media(desktop-md) {
+        width: 25%;
+    }
+
+    &__heading {
+        padding: 1rem 0 4rem;
+    }
+
+    &__element {
+        margin-bottom: 2rem;
+    }
+
+    &__error-msg {
+        position: absolute;
+        bottom: 38%;
+    }
+
+    &__button {
+        margin-top: 3rem !important;
+    }
+
+    &__redirect {
+        padding-top: 2rem;
+    }
+
+    &__section {
+        @include flex(column);
+
+        @include media(tablet) {
+            @include flex(row, space-between);
+            margin: 0 auto;
+            max-width: 100%;
+
+            & .form__displayName {
+                width: 30%;
+            }
+
+            & .form__email {
+                width: 60%;
+            }
+
+            & .form__name {
+                width: 45%;
+            }
+        }
+    }
+
+    &__submit {
+        visibility: hidden;
+    }
+}

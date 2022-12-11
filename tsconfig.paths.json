@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src/",
+    "paths": {
+      "@app/*": ["app/*"],
+      "@core/*": ["app/core/*"],
+      "@modules/*": ["app/modules/*"],
+      "@shared/*": ["app/shared/*"],
+      "@components/*": ["app/core/components/*"],
+      "@guards/*": ["app/core/guards/*"],
+      "@models/*": ["app/core/models/*"],
+      "@services/*": ["app/core/services/*"],
+      "@auth/*": ["app/modules/auth/*"],
+      "@dashboard/*": ["app/modules/dashboard/*"],
+      "@constants/*": ["constants/*"],
+      "@styles/*": ["styles/*"],
+      "@environments/*": ["environments/*"]
+    }
+  }
+}

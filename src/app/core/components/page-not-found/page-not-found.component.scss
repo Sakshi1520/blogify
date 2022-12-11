@@ -1,0 +1,6 @@
+@import 'src/styles/global-styles';
+
+.page-not-found {
+    @include flex(column, center, center);
+    height: 30vh;
+}

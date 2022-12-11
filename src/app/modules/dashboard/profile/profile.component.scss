@@ -1,0 +1,20 @@
+@import 'src/styles/global-styles';
+
+.form {
+    margin-top: 8rem;
+
+    &__heading {
+        padding-bottom: 1rem;
+    }
+
+    &__user-details {
+        margin-bottom: 2rem;
+    }
+
+    &__user-detail {
+        font-weight: 500;
+    }
+}
+.skip-btn {
+    margin-right: 1rem;
+}

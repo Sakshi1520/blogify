@@ -1,0 +1,47 @@
+@import 'src/styles/global-styles';
+
+.article-detail {
+    text-align: center;
+    margin: 8rem auto 0;
+    background-color: $form-bg-color;
+    border-radius: 1rem;
+    padding: 1rem 0.5rem;
+    font-size: 1.75rem;
+    line-height: 2rem;
+    word-wrap: break-word;
+
+    @include media(tablet) {
+        width: 75%;
+    }
+
+    @include media(desktop-sm) {
+        width: 60%;
+        padding: 2rem;
+    }
+
+    @include media(desktop-md) {
+        width: 50%;
+    }
+
+    &__intro {
+        padding-bottom: 3rem;
+        border-bottom: 0.2rem solid black;
+    }
+
+    &__tags {
+        @include flex(row, center);
+        padding: 1rem 0;
+    }
+
+    &__description {
+        padding-top: 2rem;
+    }
+
+    &__cta {
+        padding-top: 5rem;
+    }
+
+    &__button1 {
+        margin-right: 2rem;
+    }
+}

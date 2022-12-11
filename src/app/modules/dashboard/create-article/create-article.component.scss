@@ -1,0 +1,42 @@
+@import 'src/styles/global-styles';
+
+.article-form {
+    margin: 8rem auto 2rem;
+    width: 100%;
+    background-color: $form-bg-color;
+    border-radius: 1rem;
+    padding: 1rem;
+
+    @include media(desktop-sm) {
+        width: 50%;
+        padding: 3rem 2rem 5rem;
+    }
+
+    &__title {
+        padding-bottom: 2rem;
+    }
+
+    &__element {
+        font-size: 1.5rem;
+        line-height: 1.8rem;
+        width: 100%;
+    }
+
+    &__textarea{
+        margin: 2rem 0;
+    }
+
+    &__btn {
+        margin: 2rem 0 0 1rem;
+    }
+}
+
+.mat-chip-input{
+    min-height: 4rem !important;
+}
+
+.description-error {
+    text-align: left;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+}

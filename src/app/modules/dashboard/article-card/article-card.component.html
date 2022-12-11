@@ -1,0 +1,47 @@
+<article>
+    <div class="article__metadata">
+        <div class="article__author">
+            <mat-icon  class="article__author-icon">account_circle</mat-icon>
+            <span>{{article.creator}}</span>
+        </div>
+        <mat-card-subtitle>
+            <mat-chip-list selectable multiple class="article__tags">
+                <mat-chip *ngFor="let tag of article.tags.slice(0,5)" class="article__tag" #chip="matChip" [selected]="selectedTags.includes(tag)" [value]="tag" (click)="addTag(chip)">
+                    {{tag}}
+                </mat-chip>
+                <mat-chip *ngIf="(article.tags.length-5) > 0" [selectable]="false">+{{article.tags.length-5}}</mat-chip>
+            </mat-chip-list>
+        </mat-card-subtitle>
+    </div>
+    <mat-card-header class="article__title">
+        {{article.title}}
+    </mat-card-header>
+    <div class="article__details">
+        <mat-card-content class="article__content">
+            <div class="article__description" innerHTML={{article.htmlStrippedDesc}}></div>
+        </mat-card-content>
+        <mat-card-actions class="article__cta">
+            <ng-container *ngIf="article.uid === user?.uid">
+                <button mat-raised-button color="primary" class="article__button" [routerLink]="'/'+PATH.CREATE+'/'+article.aid">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-raised-button color="primary" class="article__button" (click)="openDialog(deleteDialog, article.aid)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </ng-container>
+            <button mat-raised-button color="primary" class="article__button" [routerLink]="'/'+PATH.ARTICLE+'/'+article.aid">Read</button>
+        </mat-card-actions>
+    </div>
+</article>
+
+<ng-template #deleteDialog>
+    <div class="delete-dialog">
+        <h2 matDialogTitle>Delete this Blog?</h2>
+        <p class="delete-dialog__warning" matDialogContent>Are you sure you want to DELETE this Blog? This action cannot be reversed!</p>
+        <mat-dialog-actions align="end">
+            <button mat-raised-button matDialogClose>Dismiss</button>
+            <button mat-raised-button color="warn" (click)="deleteArticle(deleteArticleId)"
+                matDialogClose>Delete</button>
+        </mat-dialog-actions>
+    </div>
+</ng-template>

@@ -1,0 +1,41 @@
+<ng-container *ngIf="isLoaded; else loadingData">
+    <div class="article-detail">
+        <ng-container *ngIf="currentArticle">
+            <div class="article-detail__intro">
+                <h1>{{currentArticle.title}}</h1>
+                <h2>Author: {{currentArticle.creator}}</h2>
+                <mat-chip-list class="article-detail__tags">
+                    <mat-chip *ngFor="let tag of currentArticle.tags">{{tag}}</mat-chip>
+                </mat-chip-list>
+            </div>
+            <div class="article-detail__description">
+                <quill-view-html format="text" theme="snow" [content]="currentArticle.description"></quill-view-html>
+            </div>
+        </ng-container>
+    </div>
+    <div *ngIf="currentArticle.uid === userId" class="article-detail__cta">
+        <button mat-raised-button class="article-detail__button1" color="primary"
+            [routerLink]="['/'+PATH.CREATE, currentArticle.aid]">Edit</button>
+        <button mat-raised-button color="primary" (click)="openDialog(deleteDialog, currentArticle.aid)">Delete</button>
+    </div>
+</ng-container>
+
+<ng-template #loadingData>
+    <div class="loading">
+        <h2 class="loading__text">Loading...</h2>
+        <mat-spinner diameter="50"></mat-spinner>
+    </div>
+</ng-template>
+
+
+<ng-template #deleteDialog>
+    <div class="delete-dialog">
+        <h2 matDialogTitle>Delete this Blog?</h2>
+        <p class="delete-dialog__warning" matDialogContent>Are you sure you want to DELETE this Blog? This action cannot be reversed!</p>
+        <mat-dialog-actions align="end">
+            <button mat-raised-button matDialogClose>Dismiss</button>
+            <button mat-raised-button color="warn" (click)="deleteArticle(deleteArticleId)"
+                matDialogClose>Delete</button>
+        </mat-dialog-actions>
+    </div>
+</ng-template>

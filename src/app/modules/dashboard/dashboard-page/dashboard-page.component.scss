@@ -1,0 +1,64 @@
+@import 'src/styles/global-styles';
+
+.article {
+    &__card-container {
+        @include flex(column, space-evenly, stretch);
+        padding-top: 2rem;
+        text-align: left;
+        overflow: hidden;
+    }
+
+    &__card {
+        padding: 1rem;
+        width: 99%;
+        margin: 1rem 0.1rem;
+        word-wrap: break-word;
+    }
+}
+
+.add-new-btn {
+    @include flex(row, center, center);
+    z-index: 10;
+    position: fixed;
+    bottom: 2%;
+    left: 2rem;
+    background-color: $pink-color;
+    border: none;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+
+    @include media(tablet) {
+        display: none;
+    }
+
+    & mat-icon {
+        color: $white-color;
+    }
+}
+
+.paginator {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+.filter-btn {
+    margin: 1rem;
+    position: relative;
+}
+
+.filter-count {
+    @include flex(row, center, center);
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: $pink-color;
+}
+
+.no-blogs-found {
+    margin-top: 5rem;
+}

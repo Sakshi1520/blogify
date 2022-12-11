@@ -1,0 +1,68 @@
+<ng-container *ngIf="loadedFormData; else loadingData">
+    <form class="form" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <h2 class="form__heading">Update Your Profile Details</h2>
+        <div class="form__user-details">
+            <p><span class="form__user-detail">Username: </span>{{user?.displayName}}</p>
+            <p><span class="form__user-detail">Email: </span>{{user?.email}}</p>
+        </div>
+        <div class="form__section">
+            <mat-form-field class="form-control form__element form__name">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName" type="text" />
+                <mat-error>
+                    <ng-container *ngTemplateOutlet="errorTemplate; context: {$implicit: profileForm.get('firstName'), controlName: 'First Name'}"></ng-container>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="form-control form__element form__name">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName" type="text" />
+                <mat-error>
+                    <ng-container *ngTemplateOutlet="errorTemplate; context: {$implicit: profileForm.get('lastName'), controlName: 'Last Name'}"></ng-container>
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <mat-form-field class="form-control form__element">
+            <mat-label>Description</mat-label>
+            <input matInput formControlName="description" type="text" />
+            <mat-error>
+                <ng-container *ngTemplateOutlet="errorTemplate; context: {$implicit: profileForm.get('description'), controlName: 'Description'}"></ng-container>
+            </mat-error>
+        </mat-form-field>
+
+        <div>
+            <a [routerLink]="'/'+PATH.DASHBOARD">
+                <button mat-raised-button color="primary" class="form__element form__button skip-btn" type="button" [disabled]="loading">
+                    Skip
+                </button>
+            </a>
+            <button color="primary" class="form__element form__button" [disabled]="loading" mat-raised-button type="submit">
+                <span [ngClass]="{'form__submit': loading}">Submit</span>
+                <mat-spinner *ngIf="loading" class="loader" color="accent" diameter="25"></mat-spinner>
+            </button>
+        </div>
+    </form>
+</ng-container>
+<ng-template #errorTemplate let-control let-controlName = "controlName">
+    <ng-container *ngIf="control?.hasError('required')">
+        {{controlName}} is Required!
+    </ng-container>
+    <ng-container *ngIf="control?.hasError('email')">
+        Invalid {{controlName}}. please enter a valid Email.
+    </ng-container>
+    <ng-container *ngIf="control?.hasError('minlength')">
+        {{controlName}} should contain at least {{VALIDATORS.MIN_LENGTH}} characters.
+    </ng-container>
+    <ng-container *ngIf="control?.hasError('maxlength')">
+        {{controlName}} should contain at most {{VALIDATORS.MAX_LENGTH}} characters.
+    </ng-container>
+</ng-template>
+
+
+<ng-template #loadingData>
+    <div class="loading">
+        <h2 class="loading__text">Loading...</h2>
+        <mat-spinner diameter="50"></mat-spinner>
+    </div>
+</ng-template>

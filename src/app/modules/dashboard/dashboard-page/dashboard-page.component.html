@@ -1,0 +1,35 @@
+<ng-container *ngIf="isLoaded; else loadingData">
+    <a matTooltip="Create New Blog" class="add-new-btn" [routerLink]="'/'+PATH.CREATE">
+        <mat-icon color="accent" class="add-new-btn__icon">add</mat-icon>
+    </a>
+
+    <button mat-raised-button color="primary" class="filter-btn" (click)="openFilterDialog()">
+        Filter <span *ngIf="filterCount" class="filter-count">{{filterCount}}</span>
+    </button>
+    <button mat-raised-button class="filter-btn" (click)="onFilterReset()">Reset Filters</button>
+
+    <div *ngIf="blogFound; else noBlogFound" class="article__card-container">
+        <mat-card *ngFor="let article of data" class="article__card">
+            <app-article-card [article]="article" [user]="user" [selectedTags]="selectedTags" (deleteArticleEvent)="deleteArticle($event)" (tagSelectedEvent)="selectedTag($event)"></app-article-card>
+        </mat-card>
+    </div>
+
+    <mat-paginator class="paginator"
+        [length]="dataFireStore.length"
+        [pageSize]="size"
+        [pageIndex]="page"
+        [pageSizeOptions]="[3, 6, 9, 12]"
+        (page)="getData($event)">
+    </mat-paginator>
+</ng-container>
+
+<ng-template #loadingData>
+    <div class="loading">
+        <h2 class="loading__text">Loading...</h2>
+        <mat-spinner diameter="50"></mat-spinner>
+    </div>
+</ng-template>
+
+<ng-template #noBlogFound>
+    <h1 class="no-blogs-found">No Blogs Found</h1>
+</ng-template>

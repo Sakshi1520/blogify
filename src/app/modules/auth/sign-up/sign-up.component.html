@@ -1,0 +1,79 @@
+<form class="form" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+    <h2 class="form__heading">Register for a New Account</h2>
+
+    <mat-form-field class="form-control form__element">
+        <mat-label>User Name</mat-label>
+        <input matInput formControlName="displayName" type="text" />
+        <mat-error>
+            <ng-container
+                *ngTemplateOutlet="errorTemplate; context: {$implicit: signUpForm.get('displayName'), controlName: 'User Name'}">
+            </ng-container>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-control form__element">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" />
+        <mat-error>
+            <ng-container
+                *ngTemplateOutlet="errorTemplate; context: {$implicit: signUpForm.get('email'), controlName: 'Email'}">
+            </ng-container>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-control form__element">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" />
+        <mat-error>
+            <ng-container
+                *ngTemplateOutlet="errorTemplate; context: {$implicit: signUpForm.get('password'), controlName: 'Password'}">
+            </ng-container>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-control form__element">
+        <mat-label>Confirm Password</mat-label>
+        <input matInput formControlName="confirmPassword" type="password" />
+        <mat-error>
+            <ng-container
+                *ngTemplateOutlet="errorTemplate; context: {$implicit: signUpForm.get('confirmPassword'), controlName: 'Confirm Password'}">
+            </ng-container>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-error class="form__error-msg">
+        <ng-container
+            *ngTemplateOutlet="errorTemplate; context: {$implicit: signUpForm, controlName: 'checkPassword'}">
+        </ng-container>
+    </mat-error>
+
+    <mat-error *ngIf="message" class="form__error-msg">{{message}}</mat-error>
+
+    <button mat-raised-button color="primary" class="form__button" type="submit" [disabled]="loading">
+        <span [ngClass]="{'form__submit': loading}">Submit</span>
+        <mat-spinner *ngIf="loading" class="loader" color="accent" diameter="25"></mat-spinner>
+    </button>
+
+    <div class="form__redirect">
+        <p>Already registered?</p>
+        <a [routerLink]="'/'+PATH.LOGIN">Login Here</a>
+    </div>
+</form>
+
+<ng-template #errorTemplate let-control let-controlName="controlName">
+    <ng-container *ngIf="control?.hasError('required')">
+        {{controlName}} is Required!
+    </ng-container>
+    <ng-container *ngIf="control?.hasError('email')">
+        Invalid {{controlName}}. please enter a valid Email.
+    </ng-container>
+    <ng-container *ngIf="control?.hasError('minlength')">
+        {{controlName}} should contain at least {{VALIDATORS.MIN_LENGTH}} characters.
+    </ng-container>
+    <ng-container *ngIf="control?.hasError('maxlength')">
+        {{controlName}} should contain at most {{VALIDATORS.MAX_LENGTH}} characters.
+    </ng-container>
+    <ng-container *ngIf="signUpForm.errors?.['passwordsDontMatch'] && controlName === 'checkPassword'">
+        Passwords Don't match
+    </ng-container>
+</ng-template>
